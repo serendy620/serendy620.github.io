@@ -42,12 +42,14 @@
     /* HERO */
     #home { min-height: 100vh; background: var(--hero-grad); display: flex; align-items: center; padding: 120px 2rem 80px; }
     .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 340px; gap: 4rem; align-items: center; }
-    .hero-text h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 700; line-height: 1.15; color: var(--text); margin-bottom: 0.4rem; }
+    .hero-text h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5vw, 4.2rem); font-weight: 700; line-height: 1.15; color: var(--text); margin-bottom: 1.5rem; }
     .hero-text h1 span { color: var(--accent); }
-    .hero-tagline { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.2rem; color: var(--accent-dark); margin-bottom: 1.6rem; }
-    .hero-keywords { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2rem; }
-    .keyword { background: var(--bg-card); border: 1px solid var(--border); color: var(--accent-dark); font-size: 0.78rem; font-weight: 500; padding: 0.3rem 0.85rem; border-radius: 999px; letter-spacing: 0.03em; }
-    .hero-desc { font-size: 1rem; color: var(--text-muted); max-width: 560px; margin-bottom: 2.2rem; line-height: 1.8; }
+    
+    .hero-keywords { display: flex; flex-wrap: nowrap; gap: 0.5rem; margin-bottom: 2rem; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .hero-keywords::-webkit-scrollbar { display: none; } /* 스크롤바 숨김 */
+    .keyword { background: var(--bg-card); border: 1px solid var(--border); color: var(--accent-dark); font-size: 0.85rem; font-weight: 500; padding: 0.35rem 0.9rem; border-radius: 999px; letter-spacing: 0.03em; white-space: nowrap; }
+    
+    .hero-desc { font-size: 1rem; color: var(--text-muted); max-width: 100%; margin-bottom: 2.2rem; line-height: 1.8; text-align: justify; }
     .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
     .btn { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.75rem 1.6rem; border-radius: 8px; font-size: 0.9rem; font-weight: 600; text-decoration: none; transition: all 0.25s; cursor: pointer; border: none; }
     .btn-primary { background: var(--accent); color: #fff; }
@@ -55,9 +57,7 @@
     .btn-outline { background: transparent; border: 2px solid var(--accent); color: var(--accent); }
     .btn-outline:hover { background: var(--accent); color: #fff; transform: translateY(-1px); }
 
-    .hero-photo { width: 100%; aspect-ratio: 3/4; background: var(--bg-card); border: 2px dashed var(--border); border-radius: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.8rem; color: var(--text-muted); font-size: 0.85rem; text-align: center; padding: 1rem; }
-    .hero-photo svg { width: 48px; height: 48px; opacity: 0.4; }
-    .photo-hint { font-size: 0.75rem; color: var(--border); }
+    .hero-photo-img { width: 100%; aspect-ratio: 3/4; background: var(--bg-card); border-radius: 16px; overflow: hidden; }
 
     /* SECTIONS */
     section { padding: 100px 2rem; }
@@ -76,7 +76,7 @@
     .card-type { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.4rem; }
     .card-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--text); margin-bottom: 0.8rem; }
     .card-items { list-style: none; }
-    .card-items li { font-size: 0.875rem; color: var(--text-muted); padding: 0.45rem 0; border-bottom: 1px solid var(--border); line-height: 1.5; }
+    .card-items li { font-size: 0.875rem; color: var(--text-muted); padding: 0.45rem 0; border-bottom: 1px solid var(--border); line-height: 1.5; text-align: justify; }
     .card-items li:last-child { border-bottom: none; }
     .card-items li strong { color: var(--text); font-weight: 500; }
 
@@ -92,13 +92,16 @@
     .pub-item:last-child { border-bottom: none; }
     .pub-num { min-width: 28px; height: 28px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; margin-top: 2px; }
     .pub-content { flex: 1; }
-    .pub-content p { font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .pub-content p { font-size: 0.9rem; color: var(--text); line-height: 1.65; text-align: justify; }
     .pub-content p em { color: var(--accent-dark); }
-    .pub-badge { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.6rem; border-radius: 4px; margin-top: 0.5rem; letter-spacing: 0.05em; }
+    .pub-meta-wrapper { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
+    .pub-badge { display: inline-block; font-size: 0.7rem; font-weight: 600; padding: 0.15rem 0.6rem; border-radius: 4px; letter-spacing: 0.05em; }
     .badge-pub { background: #e8f4e8; color: #2d6a2d; }
     .badge-review { background: #fff3e0; color: #b85c00; }
     .badge-poster { background: #e8eaf6; color: #3949ab; }
     .badge-report { background: #fce4ec; color: #c62828; }
+    .pub-link-btn { display: inline-flex; align-items: center; gap: 0.2rem; font-size: 0.75rem; font-weight: 600; color: var(--accent); text-decoration: none; transition: color 0.2s; }
+    .pub-link-btn:hover { color: var(--accent-dark); text-decoration: underline; }
 
     /* CV */
     #cv { background: var(--bg); text-align: center; }
@@ -116,7 +119,7 @@
 
     @media (max-width: 768px) {
       .hero-inner { grid-template-columns: 1fr; }
-      .hero-photo { aspect-ratio: 1/1; max-width: 260px; margin: 0 auto; }
+      .hero-photo-img { aspect-ratio: 1/1; max-width: 260px; margin: 0 auto; }
       .nav-links { display: none; }
     }
   </style>
@@ -138,7 +141,6 @@
     <div class="hero-text fade-up">
       <p class="section-label">Ph.D. Applicant · Forensic &amp; Developmental Psychology</p>
       <h1>Hi, I'm <span>Jiyoung</span> You.</h1>
-      <p class="hero-tagline">"Bridging justice and science — one young life at a time."</p>
       <div class="hero-keywords">
         <span class="keyword">Juvenile Justice</span>
         <span class="keyword">Adolescent Risk Behavior</span>
@@ -160,7 +162,7 @@
     </div>
     <div class="hero-photo-img fade-up" style="transition-delay:0.2s">
       <img src="assets/profile.jpg" alt="Jiyoung You"
-           style="width:100%; height:100%; object-fit:cover; border-radius:16px;" />
+           style="width:100%; height:100%; object-fit:cover;" />
     </div>
   </div>
 </section>
@@ -172,15 +174,20 @@
     <div class="section-divider fade-up"></div>
     <div class="research-grid">
       <div class="research-card fade-up">
-        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        </div>
         <p class="card-type">International Research</p>
         <h3 class="card-title">Youth Delinquency</h3>
         <ul class="card-items">
           <li><strong>Cross-national Mixed-Methods Study (2027, Scheduled)</strong> — Understanding youth gang perceptions and perceived victimization with Dr. Shannon Reid &amp; Dr. Sungil Han (UNCC)</li>
         </ul>
       </div>
+      
       <div class="research-card fade-up" style="transition-delay:0.1s">
-        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M14 6l-1-2H5v17h2v-7h5l1 2h7V6h-6zm4 8h-4l-1-2H7V6h5l1 2h5v6z"/></svg></div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L3 7v2h18V7l-9-5zM5 11v8h2v-8H5zm4 0v8h2v-8H9zm5 0v8h2v-8h-2zm4 0v8h2v-8h-2zM3 21v2h18v-2H3z"/></svg>
+        </div>
         <p class="card-type">Forensic Evaluations</p>
         <h3 class="card-title">Court-Submitted Assessments</h3>
         <ul class="card-items">
@@ -190,8 +197,11 @@
           <li><strong>Homicide Case Reliability Analysis (2023)</strong> — Coercive control and testimonial validity; Seoul High Court</li>
         </ul>
       </div>
+      
       <div class="research-card fade-up" style="transition-delay:0.2s">
-        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg></div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+        </div>
         <p class="card-type">Experimental Research</p>
         <h3 class="card-title">Behavioral Assessment &amp; Lab Studies</h3>
         <ul class="card-items">
@@ -199,8 +209,11 @@
           <li><strong>Attitudes Toward Rape Study (2023)</strong> — Coordinated RE-IAT study with 200 participants; contributed to manuscript development</li>
         </ul>
       </div>
+      
       <div class="research-card fade-up" style="transition-delay:0.3s">
-        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"/></svg></div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg>
+        </div>
         <p class="card-type">Computational Research</p>
         <h3 class="card-title">NLP &amp; Data-Driven Methods</h3>
         <ul class="card-items">
@@ -208,8 +221,11 @@
           <li><strong>AI Interview Support for Sexual Violence Victims (2022)</strong> — Built NLP training dataset (3,000+ statements) for AI-based investigative tools</li>
         </ul>
       </div>
+      
       <div class="research-card fade-up" style="transition-delay:0.4s">
-        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg></div>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+        </div>
         <p class="card-type">Policy Research</p>
         <h3 class="card-title">Criminological Policy &amp; Consultation</h3>
         <ul class="card-items">
@@ -231,35 +247,39 @@
       <button class="tab-btn" data-tab="presentations">Presentations</button>
       <button class="tab-btn" data-tab="reports">Technical Reports</button>
     </div>
+    
     <div class="tab-panel active" id="tab-all">
       <ul class="pub-list">
-        <li class="pub-item fade-up"><span class="pub-num">1</span><div class="pub-content"><p>Park, J., <strong>You, J.</strong>, Choi, Y., &amp; Jo, E. (2024). The Relationship Between Implicit and Explicit Evaluation of Rape: Using the Rape Evaluation Implicit Association Test. <em>Korean Journal of Forensic Psychology, 15</em>(2), 135–155.</p><span class="pub-badge badge-pub">Published</span></div></li>
-        <li class="pub-item fade-up"><span class="pub-num">2</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, E. (in progress). Bias on Trial: The Influence of Socioeconomic and Physical Cues on Juror Decisions.</p><span class="pub-badge badge-review">Under Review / In Preparation</span></div></li>
-        <li class="pub-item fade-up"><span class="pub-num">3</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, E. (2024). Exploring Juror Bias Toward Defendant SES and Appearance. <em>East Asian Association of Psychology and Law</em>, Osaka, Japan.</p><span class="pub-badge badge-poster">Poster Presentation</span></div></li>
-        <li class="pub-item fade-up"><span class="pub-num">4</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, E. (2024). Mock Juror Judgments of Defendant SES and Appearance: A Pilot Study. <em>Korean Association of Psychology and Law &amp; KICJ</em>, Seoul, Republic of Korea.</p><span class="pub-badge badge-poster">Poster Presentation</span></div></li>
-        <li class="pub-item fade-up"><span class="pub-num">5</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, E. (2023). Analyzing the Popular Discourse of Gaslighting Using Text Mining: A Case Study of Instagram Posts. <em>Korean Criminological Association</em>, Seoul, Republic of Korea.</p><span class="pub-badge badge-poster">Poster Presentation</span></div></li>
-        <li class="pub-item fade-up"><span class="pub-num">6</span><div class="pub-content"><p>Hong, S., Cho, J., Jeong, S., <strong>You, J.</strong>, &amp; Park, J. (2024). Policy Strategies for Illegal Gambling Response and Governance. <em>Presidential Commission on National Unity</em>.</p><span class="pub-badge badge-report">Technical Report</span></div></li>
-        <li class="pub-item fade-up"><span class="pub-num">7</span><div class="pub-content"><p>Jo, E., Jeong, S., Kim, S., <strong>You, J.</strong>, et al. (2023). Development of the Expert-based Stalking Recidivism Assessment Tool: Final Report. <em>Institute for Industry-Academia Cooperation, Dongguk University</em>. Commissioned by Gwangju Metropolitan Police Agency.</p><span class="pub-badge badge-report">Technical Report</span></div></li>
+        <li class="pub-item fade-up"><span class="pub-num">1</span><div class="pub-content"><p>Park, J., <strong>You, J.</strong>, Choi, Y., &amp; Jo, E. (2024). The Relationship Between Implicit and Explicit Evaluation of Rape: Using the Rape Evaluation Implicit Association Test. <em>Korean Journal of Forensic Psychology, 15</em>(2), 135–155.</p><div class="pub-meta-wrapper"><span class="pub-badge badge-pub">Published</span><a href="#" target="_blank" class="pub-link-btn">View Paper ↗</a></div></div></li>
+        <li class="pub-item fade-up"><span class="pub-num">2</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, E. (in progress). Bias on Trial: The Influence of Socioeconomic and Physical Cues on Juror Decisions.</p><div class="pub-meta-wrapper"><span class="pub-badge badge-review">Under Review / In Preparation</span><a href="#" target="_blank" class="pub-link-btn">View Link ↗</a></div></div></li>
+        <li class="pub-item fade-up"><span class="pub-num">3</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, e. (2024). Exploring Juror Bias Toward Defendant SES and Appearance. <em>East Asian Association of Psychology and Law</em>, Osaka, Japan.</p><div class="pub-meta-wrapper"><span class="pub-badge badge-poster">Poster Presentation</span><a href="#" target="_blank" class="pub-link-btn">View Poster ↗</a></div></div></li>
+        <li class="pub-item fade-up"><span class="pub-num">4</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, E. (2024). Mock Juror Judgments of Defendant SES and Appearance: A Pilot Study. <em>Korean Association of Psychology and Law &amp; KICJ</em>, Seoul, Republic of Korea.</p><div class="pub-meta-wrapper"><span class="pub-badge badge-poster">Poster Presentation</span><a href="#" target="_blank" class="pub-link-btn">View Poster ↗</a></div></div></li>
+        <li class="pub-item fade-up"><span class="pub-num">5</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, E. (2023). Analyzing the Popular Discourse of Gaslighting Using Text Mining: A Case Study of Instagram Posts. <em>Korean Criminological Association</em>, Seoul, Republic of Korea.</p><div class="pub-meta-wrapper"><span class="pub-badge badge-poster">Poster Presentation</span><a href="#" target="_blank" class="pub-link-btn">View Poster ↗</a></div></div></li>
+        <li class="pub-item fade-up"><span class="pub-num">6</span><div class="pub-content"><p>Hong, S., Cho, J., Jeong, S., <strong>You, J.</strong>, &amp; Park, J. (2024). Policy Strategies for Illegal Gambling Response and Governance. <em>Presidential Commission on National Unity</em>.</p><div class="pub-meta-wrapper"><span class="pub-badge badge-report">Technical Report</span><a href="#" target="_blank" class="pub-link-btn">View Report ↗</a></div></div></li>
+        <li class="pub-item fade-up"><span class="pub-num">7</span><div class="pub-content"><p>Jo, E., Jeong, S., Kim, S., <strong>You, J.</strong>, et al. (2023). Development of the Expert-based Stalking Recidivism Assessment Tool: Final Report. <em>Institute for Industry-Academia Cooperation, Dongguk University</em>. Commissioned by Gwangju Metropolitan Police Agency.</p><div class="pub-meta-wrapper"><span class="pub-badge badge-report">Technical Report</span><a href="#" target="_blank" class="pub-link-btn">View Report ↗</a></div></div></li>
       </ul>
     </div>
+    
     <div class="tab-panel" id="tab-publications">
       <ul class="pub-list">
-        <li class="pub-item fade-up"><span class="pub-num">1</span><div class="pub-content"><p>Park, J., <strong>You, J.</strong>, Choi, Y., &amp; Jo, E. (2024). The Relationship Between Implicit and Explicit Evaluation of Rape: Using the Rape Evaluation Implicit Association Test. <em>Korean Journal of Forensic Psychology, 15</em>(2), 135–155.</p><span class="pub-badge badge-pub">Published</span></div></li>
-        <li class="pub-item fade-up"><span class="pub-num">2</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, E. (in progress). Bias on Trial: The Influence of Socioeconomic and Physical Cues on Juror Decisions.</p><span class="pub-badge badge-review">Under Review / In Preparation</span></div></li>
+        <li class="pub-item fade-up"><span class="pub-num">1</span><div class="pub-content"><p>Park, J., <strong>You, J.</strong>, Choi, Y., &amp; Jo, E. (2024). The Relationship Between Implicit and Explicit Evaluation of Rape: Using the Rape Evaluation Implicit Association Test. <em>Korean Journal of Forensic Psychology, 15</em>(2), 135–155.</p><div class="pub-meta-wrapper"><span class="pub-badge badge-pub">Published</span><a href="#" target="_blank" class="pub-link-btn">View Paper ↗</a></div></div></li>
+        <li class="pub-item fade-up"><span class="pub-num">2</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, E. (in progress). Bias on Trial: The Influence of Socioeconomic and Physical Cues on Juror Decisions.</p><div class="pub-meta-wrapper"><span class="pub-badge badge-review">Under Review / In Preparation</span><a href="#" target="_blank" class="pub-link-btn">View Link ↗</a></div></div></li>
       </ul>
     </div>
+    
     <div class="tab-panel" id="tab-presentations">
       <ul class="pub-list">
-        <li class="pub-item fade-up"><span class="pub-num">1</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, E. (2024). Exploring Juror Bias Toward Defendant SES and Appearance. <em>East Asian Association of Psychology and Law</em>, Osaka, Japan.</p><span class="pub-badge badge-poster">Poster Presentation</span></div></li>
-        <li class="pub-item fade-up"><span class="pub-num">2</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, E. (2024). Mock Juror Judgments of Defendant SES and Appearance: A Pilot Study. <em>Korean Association of Psychology and Law &amp; KICJ</em>, Seoul, Republic of Korea.</p><span class="pub-badge badge-poster">Poster Presentation</span></div></li>
-        <li class="pub-item fade-up"><span class="pub-num">3</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, E. (2023). Analyzing the Popular Discourse of Gaslighting Using Text Mining: A Case Study of Instagram Posts. <em>Korean Criminological Association</em>, Seoul, Republic of Korea.</p><span class="pub-badge badge-poster">Poster Presentation</span></div></li>
-        <li class="pub-item fade-up"><span class="pub-num">4</span><div class="pub-content"><p>Kang, D., Kwon, S., Kim, S., Park, S., Park, J., <strong>You, J.</strong>, Lee, H., Jeong, Y., Choi, G. (2018). The Effect of Self-Discrepancy on Self-Disclosure of Instagram Users. <em>Unity of Mind Analyst</em>, Seoul, Republic of Korea.</p><span class="pub-badge badge-poster">Poster Presentation</span></div></li>
+        <li class="pub-item fade-up"><span class="pub-num">1</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, E. (2024). Exploring Juror Bias Toward Defendant SES and Appearance. <em>East Asian Association of Psychology and Law</em>, Osaka, Japan.</p><div class="pub-meta-wrapper"><span class="pub-badge badge-poster">Poster Presentation</span><a href="#" target="_blank" class="pub-link-btn">View Poster ↗</a></div></div></li>
+        <li class="pub-item fade-up"><span class="pub-num">2</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, E. (2024). Mock Juror Judgments of Defendant SES and Appearance: A Pilot Study. <em>Korean Association of Psychology and Law &amp; KICJ</em>, Seoul, Republic of Korea.</p><div class="pub-meta-wrapper"><span class="pub-badge badge-poster">Poster Presentation</span><a href="#" target="_blank" class="pub-link-btn">View Poster ↗</a></div></div></li>
+        <li class="pub-item fade-up"><span class="pub-num">3</span><div class="pub-content"><p><strong>You, J.</strong>, &amp; Jo, E. (2023). Analyzing the Popular Discourse of Gaslighting Using Text Mining: A Case Study of Instagram Posts. <em>Korean Criminological Association</em>, Seoul, Republic of Korea.</p><div class="pub-meta-wrapper"><span class="pub-badge badge-poster">Poster Presentation</span><a href="#" target="_blank" class="pub-link-btn">View Poster ↗</a></div></div></li>
+        <li class="pub-item fade-up"><span class="pub-num">4</span><div class="pub-content"><p>Kang, D., Kwon, S., Kim, S., Park, S., Park, J., <strong>You, J.</strong>, Lee, H., Jeong, Y., Choi, G. (2018). The Effect of Self-Discrepancy on Self-Disclosure of Instagram Users. <em>Unity of Mind Analyst</em>, Seoul, Republic of Korea.</p><div class="pub-meta-wrapper"><span class="pub-badge badge-poster">Poster Presentation</span><a href="#" target="_blank" class="pub-link-btn">View Poster ↗</a></div></div></li>
       </ul>
     </div>
+    
     <div class="tab-panel" id="tab-reports">
       <ul class="pub-list">
-        <li class="pub-item fade-up"><span class="pub-num">1</span><div class="pub-content"><p>Hong, S., Cho, J., Jeong, S., <strong>You, J.</strong>, &amp; Park, J. (2024). Policy Strategies for Illegal Gambling Response and Governance. <em>Presidential Commission on National Unity</em>.</p><span class="pub-badge badge-report">Technical Report</span></div></li>
-        <li class="pub-item fade-up"><span class="pub-num">2</span><div class="pub-content"><p>Jo, E., Jeong, S., Kim, S., <strong>You, J.</strong>, et al. (2023). Development of the Expert-based Stalking Recidivism Assessment Tool: Final Report. <em>Institute for Industry-Academia Cooperation, Dongguk University</em>. Commissioned by Gwangju Metropolitan Police Agency.</p><span class="pub-badge badge-report">Technical Report</span></div></li>
+        <li class="pub-item fade-up"><span class="pub-num">1</span><div class="pub-content"><p>Hong, S., Cho, J., Jeong, S., <strong>You, J.</strong>, &amp; Park, J. (2024). Policy Strategies for Illegal Gambling Response and Governance. <em>Presidential Commission on National Unity</em>.</p><div class="pub-meta-wrapper"><span class="pub-badge badge-report">Technical Report</span><a href="#" target="_blank" class="pub-link-btn">View Report ↗</a></div></div></li>
+        <li class="pub-item fade-up"><span class="pub-num">2</span><div class="pub-content"><p>Jo, E., Jeong, S., Kim, S., <strong>You, J.</strong>, et al. (2023). Development of the Expert-based Stalking Recidivism Assessment Tool: Final Report. <em>Institute for Industry-Academia Cooperation, Dongguk University</em>. Commissioned by Gwangju Metropolitan Police Agency.</p><div class="pub-meta-wrapper"><span class="pub-badge badge-report">Technical Report</span><a href="#" target="_blank" class="pub-link-btn">View Report ↗</a></div></div></li>
       </ul>
     </div>
   </div>
