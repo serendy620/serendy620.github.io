@@ -220,6 +220,92 @@
     body.dark-mode .dot.active {
       background-color: var(--accent);
     }
+
+    /* 모바일 메뉴 버튼: 데스크톱에서는 보이지 않음 */
+    .nav-toggle {
+      display: none;
+      width: 42px;
+      height: 42px;
+      padding: 8px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: transparent;
+      cursor: pointer;
+    }
+    
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      margin: 4px auto;
+      background: var(--text);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    
+    .nav-toggle:focus-visible,
+    .dark-mode-btn:focus-visible,
+    .tab-btn:focus-visible,
+    .dot:focus-visible {
+      outline: 3px solid var(--accent-light);
+      outline-offset: 3px;
+    }
+    
+    .dark-mode-btn {
+      background: none;
+      border: none;
+      padding: 0.25rem;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+    }
+    
+    @media (max-width: 768px) {
+      .nav-toggle {
+        display: block;
+      }
+    
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 64px;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        padding: 0.75rem 2rem 1rem;
+        background: var(--bg-nav);
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 12px 24px rgba(23, 32, 46, 0.08);
+      }
+    
+      .nav-links.open {
+        display: flex;
+      }
+    
+      .nav-links li {
+        width: 100%;
+      }
+    
+      .nav-links a {
+        display: block;
+        padding: 0.65rem 0;
+      }
+    
+      .nav-links li:last-child {
+        padding-top: 0.5rem;
+      }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      .nav-toggle span,
+      body,
+      nav,
+      section,
+      .research-card,
+      .cv-box {
+        transition: none;
+      }
+    }
   </style>
     <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-T7XSMBNPJX"></script>
@@ -235,12 +321,34 @@
 
 <nav>
   <a class="nav-logo" href="#home">Jiyoung You</a>
-  <ul class="nav-links">
+
+  <button
+    class="nav-toggle"
+    id="navToggle"
+    type="button"
+    aria-label="Open navigation menu"
+    aria-expanded="false"
+    aria-controls="primary-navigation"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <ul class="nav-links" id="primary-navigation">
     <li><a href="#home">Home</a></li>
     <li><a href="#research">Research</a></li>
     <li><a href="#publications">Publications</a></li>
     <li><a href="#cv">CV</a></li>
-    <button id="darkModeBtn" style="background:none; border:none; font-size:24px; cursor:pointer;">🌙</button>  
+    <li>
+      <button
+        id="darkModeBtn"
+        class="dark-mode-btn"
+        type="button"
+        aria-label="Switch to dark mode"
+        aria-pressed="false"
+      >🌙</button>
+    </li>
   </ul>
 </nav>
 
@@ -442,6 +550,29 @@
 </footer>
 
 <script>
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('primary-navigation');
+
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      navToggle.setAttribute('aria-expanded', String(isOpen));
+      navToggle.setAttribute(
+        'aria-label',
+        isOpen ? 'Close navigation menu' : 'Open navigation menu'
+      );
+    });
+
+  // 메뉴 항목을 선택하면 모바일 메뉴를 자동으로 닫음
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      navToggle.setAttribute('aria-label', 'Open navigation menu');
+    });
+  });
+}
+  
   // 1. 기존 코드: 탭 버튼 기능 (건드리지 않음)
   document.querySelectorAll('.tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -460,15 +591,32 @@
 
   // 3. ✨ 새로 추가하는 다크 모드 기능 ✨
   const darkModeBtn = document.getElementById('darkModeBtn');
-  if (darkModeBtn) { // 버튼이 화면에 있을 때만 작동하도록 안전장치 추가
+
+  function updateThemeButton() {
+    const isDark = document.body.classList.contains('dark-mode');
+  
+    darkModeBtn.textContent = isDark ? '☀️' : '🌙';
+    darkModeBtn.setAttribute(
+      'aria-label',
+      isDark ? 'Switch to light mode' : 'Switch to dark mode'
+    );
+    darkModeBtn.setAttribute('aria-pressed', String(isDark));
+  }
+  
+  if (darkModeBtn) {
+    const savedTheme = localStorage.getItem('theme');
+  
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+    }
+  
     darkModeBtn.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      if (document.body.classList.contains('dark-mode')) {
-        darkModeBtn.textContent = '☀️';
-      } else {
-        darkModeBtn.textContent = '🌙';
-      }
+      const isDark = document.body.classList.toggle('dark-mode');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      updateThemeButton();
     });
+  
+    updateThemeButton();
   }
 
 // ✨ 사진 클릭 시 다음 사진으로 넘어가는 기능 ✨
