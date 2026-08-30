@@ -136,9 +136,26 @@
     .cv-box p { color: var(--text-muted); margin-bottom: 2rem; font-size: 0.95rem; }
 
     /* FOOTER */
-    footer { background: var(--text); color: rgba(255,255,255,0.5); text-align: center; padding: 2rem; font-size: 0.8rem; }
-    footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
-    footer a:hover { color: var(--accent-light); }
+    footer { 
+      background: var(--bg); /* 모드에 따라 전체 배경색과 동일하게 변함 */
+      color: var(--text-muted); /* 모드에 따라 글씨 색상도 자동 전환 */
+      text-align: center; 
+      padding: 3rem 2rem; 
+      font-size: 0.85rem; 
+      transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease; 
+      border-top: 1px solid var(--border); /* 본문과 구분되도록 얇은 선 추가 */
+    }
+
+    footer a { 
+      color: var(--text); /* 이메일, 링크드인 링크 글씨 색상 */
+      text-decoration: none; 
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { 
+      color: var(--accent); /* 마우스를 올리면 포인트 컬러(파란색)로 변함 */
+    }
 
     /* SCROLL FADE */
     .fade-up { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
