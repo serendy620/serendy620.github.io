@@ -469,25 +469,32 @@
     });
   }
 
-// ✨ Dot 클릭 시 사진 넘어가는 기능 ✨
-  const track = document.getElementById('sliderTrack');
-  const dots = document.querySelectorAll('.dot');
+// ✨ 사진 클릭 시 다음 사진으로 넘어가는 기능 ✨
+const track = document.getElementById('sliderTrack');
+const dots = document.querySelectorAll('.dot');
+const slider = document.querySelector('.photo-slider');
 
-  if (track && dots.length > 0) {
-    dots.forEach(dot => {
-      dot.addEventListener('click', (e) => {
-        // 1. 몇 번째 닷을 눌렀는지 번호(0 또는 1) 가져오기
-        const targetIndex = e.target.getAttribute('data-index');
-        
-        // 2. 그 번호에 맞춰서 사진 기차 이동시키기 (-0%, -100%)
-        track.style.transform = `translateX(-${targetIndex * 100}%)`;
-        
-        // 3. 기존의 하얀색 불 끄고, 방금 누른 닷에만 불 켜기
-        dots.forEach(d => d.classList.remove('active'));
-        e.target.classList.add('active');
-      });
-    });
+if (track && slider) {
+  const total = track.querySelectorAll('img').length;
+  let current = 0;
+
+  function goTo(index) {
+    current = (index + total) % total;   // 마지막 다음은 다시 첫 장
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
   }
+
+  // 사진 어디를 눌러도 다음 장으로
+  slider.addEventListener('click', () => goTo(current + 1));
+
+  // dot도 계속 쓰고 싶다면 유지 (필요 없으면 이 블록 삭제)
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', (e) => {
+      e.stopPropagation();   // 슬라이더 클릭과 겹치지 않게
+      goTo(i);
+    });
+  });
+}
 </script>
 </body>
 </html>
