@@ -204,20 +204,24 @@
     }
 
     .dot {
-      width: 8px;
-      height: 8px;
-      background-color: rgba(255, 255, 255, 0.4); 
+      width: 10px;
+      height: 10px;
+      padding: 0;
+      border: 0;
+      background-color: rgba(255, 255, 255, 0.4);
       border-radius: 50%;
       cursor: pointer;
       transition: background-color 0.3s, transform 0.3s;
     }
-
-    .dot.active {
-      background-color: #fff; 
-      transform: scale(1.2); 
+    
+    .dot.active,
+    .dot[aria-current="true"] {
+      background-color: #fff;
+      transform: scale(1.2);
     }
 
-    body.dark-mode .dot.active {
+    body.dark-mode .dot.active,
+    body.dark-mode .dot[aria-current="true"] {
       background-color: var(--accent);
     }
 
@@ -375,20 +379,57 @@
         <a href="assets/JIYOUNG_CV.pdf" target="_blank" class="btn btn-outline">Curriculum Vitae</a>
       </div>
     </div>
-    <div class="hero-photo-img photo-slider fade-up" style="transition-delay:0.2s">
-      <div class="slider-track" id="sliderTrack" style="display: flex; width: 100%; height: 100%;">
-        <img src="./assets/Jiyoung1.jpeg" alt="Jiyoung1" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; flex: 0 0 100%;">
-        <img src="./assets/Jiyoung2.jpg" alt="Jiyoung2" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; flex: 0 0 100%;">
-        <img src="./assets/Jiyoung3.jpg" alt="Jiyoung3" style="width: 100%; height: 100%; object-fit: cover; flex-shrink: 0; flex: 0 0 100%;">
-      </div>
-      
-      <!-- 닷 인디케이터 -->
-      <div class="slider-dots" id="sliderDots">
-        <span class="dot active" data-index="0"></span>
-        <span class="dot" data-index="1"></span>
-        <span class="dot" data-index="2"></span>
-      </div>
-    </div>
+    <div
+  class="hero-photo-img photo-slider fade-up"
+  style="transition-delay:0.2s"
+  role="region"
+  aria-label="Portrait gallery"
+  tabindex="0"
+    >
+  <div class="slider-track" id="sliderTrack">
+    <img
+      src="./assets/Jiyoung1.jpeg"
+      alt="Selfie of Jiyoung You in Seoul"
+    >
+    <img
+      src="./assets/Jiyoung2.jpg"
+      alt="Jiyoung You in Gangneung"
+    >
+    <img
+      src="./assets/Jiyoung3.jpg"
+      alt="Running at Johns Hopkins Univeristy"
+    >
+  </div>
+
+  <div
+    class="slider-dots"
+    id="sliderDots"
+    role="tablist"
+    aria-label="Choose portrait"
+  >
+    <button
+      class="dot active"
+      type="button"
+      data-index="0"
+      aria-label="View portrait 1"
+      aria-current="true"
+    ></button>
+    <button
+      class="dot"
+      type="button"
+      data-index="1"
+      aria-label="View portrait 2"
+      aria-current="false"
+    ></button>
+    <button
+      class="dot"
+      type="button"
+      data-index="2"
+      aria-label="View portrait 3"
+      aria-current="false"
+    ></button>
+  </div>
+</div>
   </div>
 </section>
 
