@@ -7,7 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232E5090'/><text x='50%' y='50%' font-family='Arial' font-weight='bold' font-size='45' fill='white' dominant-baseline='central' text-anchor='middle'>JY</text></svg>">  <style>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%232E5090'/><text x='50%' y='50%' font-family='Arial' font-weight='bold' font-size='45' fill='white' dominant-baseline='central' text-anchor='middle'>JY</text></svg>">  
+  <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
@@ -25,6 +26,11 @@
 
     html { scroll-behavior: smooth; }
     body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+    /* 어떤 화면 크기에서도 'Jiyoung (Serendy) You'가 두 줄로 꺾이지 않고 한 줄로 유지됨 */
+    .name-wrapper {
+      white-space: nowrap; 
+    }
 
     /* NAV */
     nav {
@@ -168,7 +174,7 @@
   <div class="hero-inner">
     <div class="hero-text fade-up">
       <p class="section-label">Ph.D. Applicant · Developmental Psychopathology · Justice-Involved Youth</p>
-      <h1>Hi, I'm <span>Jiyoung</span> You.</h1>
+      <h1> <span class="name-wrapper">Jiyoung (Serendy) You</span> </h1>
       <div class="hero-keywords">
         <span class="keyword">Developmental Psychopathology</span>
         <span class="keyword">Adolescent Antisocial Behavior</span>
