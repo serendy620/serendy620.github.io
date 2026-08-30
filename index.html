@@ -58,8 +58,8 @@
       --accent: #BDB9F2;
       --accent-dark: #D8D5FA;
       --accent-light: #9892E5;
-      --text: #F2F0EC;
-      --text-muted: #D0CFD0;
+      --text: #F2F0ED;
+      --text-muted: #D0CFD1;
       --border: #62647A;
       --hero-grad: linear-gradient(135deg, #414354 0%, #4C4B63 100%);
     }
@@ -775,32 +775,75 @@
     updateThemeButton();
   }
 
-// ✨ 사진 클릭 시 다음 사진으로 넘어가는 기능 ✨
-const track = document.getElementById('sliderTrack');
-const dots = document.querySelectorAll('.dot');
-const slider = document.querySelector('.photo-slider');
-
-if (track && slider) {
-  const total = track.querySelectorAll('img').length;
-  let current = 0;
-
-  function goTo(index) {
-    current = (index + total) % total;   // 마지막 다음은 다시 첫 장
-    track.style.transform = `translateX(-${current * 100}%)`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
-  }
-
-  // 사진 어디를 눌러도 다음 장으로
-  slider.addEventListener('click', () => goTo(current + 1));
-
-  // dot도 계속 쓰고 싶다면 유지 (필요 없으면 이 블록 삭제)
-  dots.forEach((dot, i) => {
-    dot.addEventListener('click', (e) => {
-      e.stopPropagation();   // 슬라이더 클릭과 겹치지 않게
-      goTo(i);
+  // 사진 슬라이더
+  const track = document.getElementById('sliderTrack');
+  const dots = document.querySelectorAll('.dot');
+  const slider = document.querySelector('.photo-slider');
+  const slides = track ? track.querySelectorAll('img') : [];
+  
+  if (track && slider && slides.length > 0) {
+    const total = slides.length;
+    let current = 0;
+  
+    function updateSlider() {
+      // 현재 사진을 화면에 표시
+      track.style.transform = `translateX(-${current * 100}%)`;
+  
+      // 모든 dot을 먼저 확인한 뒤 현재 사진의 dot만 활성화
+      dots.forEach((dot, index) => {
+        const isCurrent = index === current;
+  
+        dot.classList.toggle('active', isCurrent);
+        dot.setAttribute('aria-current', String(isCurrent));
+      });
+  
+      // 현재 보이지 않는 사진은 보조기술이 읽지 않도록 표시
+      slides.forEach((slide, index) => {
+        slide.setAttribute('aria-hidden', String(index !== current));
+      });
+    }
+  
+    function goTo(index) {
+      current = (index + total) % total;
+      updateSlider();
+    }
+  
+    // 사진을 클릭하면 다음 사진으로 이동
+    slider.addEventListener('click', event => {
+      // dot을 클릭한 경우에는 아래 dot 이벤트만 실행
+      if (event.target.closest('.dot')) return;
+      goTo(current + 1);
     });
-  });
-}
+  
+    // 사진 영역에 포커스가 있을 때 키보드로 이동
+    slider.addEventListener('keydown', event => {
+      if (event.key === 'ArrowRight') {
+        event.preventDefault();
+        goTo(current + 1);
+      }
+  
+      if (event.key === 'ArrowLeft') {
+        event.preventDefault();
+        goTo(current - 1);
+      }
+  
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        goTo(current + 1);
+      }
+    });
+  
+    // dot을 클릭하면 해당 번호의 사진으로 이동
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', event => {
+        event.stopPropagation();
+        goTo(index);
+      });
+    });
+  
+    // 최초 상태 동기화
+    updateSlider();
+  }
 </script>
 </body>
 </html>
