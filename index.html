@@ -127,6 +127,27 @@
     .pub-link-btn { display: inline-flex; align-items: center; gap: 0.2rem; font-size: 0.75rem; font-weight: 600; color: var(--accent); text-decoration: none; transition: color 0.2s; }
     .pub-link-btn:hover { color: var(--accent-dark); text-decoration: underline; }
 
+      /* 다크모드 시 publications badge 색상 변경, 불필요한 경우 삭제 */
+      body.dark-mode .badge-pub {
+    background: #304638;
+    color: #B8D9BC;
+  }
+  
+  body.dark-mode .badge-review {
+    background: #50402B;
+    color: #F0C98C;
+  }
+  
+  body.dark-mode .badge-poster {
+    background: #3D3B63;
+    color: #C8C5FF;
+  }
+  
+  body.dark-mode .badge-report {
+    background: #54363F;
+    color: #F0B4C1;
+  }
+
     /* CV */
     #cv { background: var(--bg); text-align: center; }
     .cv-box { max-width: 560px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 3rem 2rem; }
