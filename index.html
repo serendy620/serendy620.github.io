@@ -425,6 +425,37 @@
         width: min(200px, 64vw);
       }
     }
+
+        /* METHODS & SKILLS */
+    .skills-block { margin-top: 4.5rem; }
+    .skills-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+      font-weight: 600; color: var(--text); margin-bottom: 0.6rem;
+    }
+    .skills-divider { width: 36px; height: 3px; background: var(--accent); border-radius: 2px; margin-bottom: 2.2rem; }
+    .skills-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.2rem; }
+    .skill-item {
+      background: var(--bg-card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.4rem 1.5rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+    .skill-item:hover { transform: translateY(-3px); box-shadow: 0 10px 26px rgba(46,80,144,0.10); }
+    .skill-label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--accent); margin-bottom: 0.55rem;
+    }
+    .skill-item p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+
+    @media (max-width: 1024px) {
+      .skills-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 768px) {
+      .skills-block { margin-top: 3rem; }
+      .skills-grid { grid-template-columns: 1fr; gap: 1rem; }
+      .skill-item { padding: 1.2rem 1.25rem; }
+    }
   </style>
   
     <!-- Google tag (gtag.js) -->
@@ -631,6 +662,29 @@
         </ul>
       </div>
     </div>
+          <!-- Methods & Skills 추가 -->
+          <div class="skills-block">
+        <h2 class="skills-heading fade-up">Methods &amp; Skills</h2>
+        <div class="skills-divider fade-up"></div>
+        <div class="skills-grid">
+          <div class="skill-item fade-up">
+            <p class="skill-label">Research Design</p>
+            <p>Factorial experimental design, ANOVA/ANCOVA, multiple regression, a priori power analysis (G*Power), manipulation checks</p>
+          </div>
+          <div class="skill-item fade-up" style="transition-delay:0.1s">
+            <p class="skill-label">Measurement &amp; Validation</p>
+            <p>Instrument development, internal consistency (Cronbach's α), inter-rater reliability (ICC), criterion validity, systematic case-file coding</p>
+          </div>
+          <div class="skill-item fade-up" style="transition-delay:0.2s">
+            <p class="skill-label">Technical Skills</p>
+            <p>Python (text mining, NLP), SPSS, jamovi</p>
+          </div>
+          <div class="skill-item fade-up" style="transition-delay:0.3s">
+            <p class="skill-label">Psychological Methods</p>
+            <p>Structured risk assessment, statement validity analysis (SVA/CBCA), NICHD protocol interviewing, PAI-A administration</p>
+          </div>
+        </div>
+      </div>
   </div>
 </section>
 
